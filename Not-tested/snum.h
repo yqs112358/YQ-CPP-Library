@@ -505,7 +505,7 @@ string snum::multiply(const string &a,const string &b)
 }
 string snum::divide(const string &a,const string &b,string *remainer)
 {
-	if(b == "0")
+	if(iszero(b))
 		throw std::logic_error("[SNUM] Divide by zero!");
 	
 	auto setrm=[&remainer](const string &val)
@@ -662,6 +662,7 @@ istream& operator>>(istream &is,snum &n)
 {
 	if(!(is >> n.num))
 		n.num="0";
+	n.num=getInt(n.num);
 }
 
 snum operator+(const snum &sn,const int &n)

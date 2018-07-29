@@ -9,8 +9,9 @@ using std::string;
 
 bool Run(string filepath,string cmdpara="",bool hidden=false,
 			HANDLE hPipeIn=0,HANDLE hPipeOut=0,
+			SECURITY_ATTRIBUTES *sa=NULL, 
 			HANDLE *hPro=0,HANDLE *hThr=0,
-			SECURITY_ATTRIBUTES *sa=NULL)
+			)
 {
 	try{
 		if(filepath.empty())

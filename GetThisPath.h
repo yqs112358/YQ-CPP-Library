@@ -18,7 +18,7 @@ string GetThisPath()
 string GetThisDir()
 {
 	string sDir(GetThisPath());
-	return strPath.substr(0, sDir.find_last_of('\\', sDir.length())+1);
+	return sDir.substr(0, sDir.find_last_of('\\', sDir.length())+1);
 }
 
 #endif

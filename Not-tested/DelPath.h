@@ -1,6 +1,7 @@
 #ifndef YQ_DEL_PATH_H
 #define YQ_DEL_PATH_H 
 
+#include <windows.h>
 #include <string>
 #include <stack>
 #include <queue>
@@ -13,11 +14,18 @@ using std::queue;
 
 namespace DEL_PATH_H_HELP_FUNCS
 {
-	bool RemoveFile(string path);
-	bool RemodeDir(string path);
+	bool RemoveFile(string path)
+	{
+		DeleteFile(path.c_str());
+	}
+	
+	bool RemoveDir(string path)
+	{
+		RemoveDirectory(path.c_str());
+	}
 }
 
-bool DelTree(string path)
+bool DelPath(string path)
 {
 	namespace FUNC = DEL_PATH_H_HELP_FUNCS;
 	try{
@@ -54,7 +62,7 @@ bool DelTree(string path)
 			
 			do
 			{
-				if(fc.IsDir())
+				if(fc.isDir())
 					flist.push(nowpath+fc.getName());
 				else if(!FUNC::RemoveFile(nowpath+fc.getName()))
 					return false;
