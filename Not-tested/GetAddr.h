@@ -5,7 +5,7 @@
 
 using std::string;
 
-string GetLocalAddr(SOCKET s,int *port=0)
+string GetLocalAddr(SOCKET s,int *port=nullptr)
 {
 	try{
 		int len=sizeof(sockaddr_in);
@@ -14,7 +14,7 @@ string GetLocalAddr(SOCKET s,int *port=0)
 			return "";
 		if(getsockname(s,(sockaddr*)&sa,&len) == 0)
 		{
-			if(port != 0)
+			if(port)
 				*port=ntohs(sa.sin_port);
 			return string(inet_ntoa(sa.sin_addr));
 		}
@@ -26,7 +26,7 @@ string GetLocalAddr(SOCKET s,int *port=0)
 	}
 }
 
-string GetRemoteAddr(SOCKET s,int *port=0)
+string GetRemoteAddr(SOCKET s,int *port=nullptr)
 {
 	try{
 		int len=sizeof(sockaddr_in);
@@ -35,7 +35,7 @@ string GetRemoteAddr(SOCKET s,int *port=0)
 			return "";
 		if(getpeername(s,(sockaddr*)&sa,&len) == 0)
 		{
-			if(port != 0)
+			if(port)
 				*port=ntohs(sa.sin_port);
 			return string(inet_ntoa(sa.sin_addr));
 		}
