@@ -1,19 +1,6 @@
 #ifndef YQ_SNUM_H
 #define YQ_SNUM_H
 
-#include <string>
-#include "StrInt.h"
-#include <exception>
-#include <istream>
-#include <ostream>
-
-using std::string;
-using std::istream;
-using std::ostream;
-
-#define MAXNUM_SNUM "2147483647"
-#define MINNUM_SNUM "-2147483648"
-#define INTLEN_SNUM 9
 
 class snum
 {
@@ -34,10 +21,7 @@ class snum
 	public:
 		//Í¨ÓÃº¯Êý 
 		static string negative(const string &n);
-		static bool belowzero(const string &n);
-		static bool iszero(const string &n);
-		
-		static string getInt(const string &n);
+		static bool belowzero(const string &n);hhijgghhhh
 		static bool checkInt(const string &n);
 		static string abs(const string &n);
 		
