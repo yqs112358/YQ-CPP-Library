@@ -294,7 +294,7 @@ string snum::minus_act(string a,string b)
 			}
 			*pa+=10;
 		}
-		*pa-=*pb;
+		*pa-=*pb-'0';
 	}
 	while(pb != b.begin());
 	

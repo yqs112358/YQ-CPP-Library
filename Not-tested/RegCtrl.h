@@ -4,6 +4,7 @@
 #include <windows.h>
 #include <Winreg.h>
 #include <string>
+#include "Is64bit.h"
 
 using std::string;
 
@@ -12,12 +13,13 @@ class RegCtrl
 	private:
 		HKEY hKey;
 		bool isopen=false;
+		REGSAM reg_bit=0;
 		
 		HKEY getroot(string str);
 		string getkey(string str);
 	public:
 		RegCtrl();
-		RegCtrl(string key,REGSAM rs=KEY_ALL_ACCESS,bool *open=nullptr,SECURITY_ATTRIBUTES *sa=nullptr,DWORD op=REG_OPTION_NON_VOLATILE);
+		RegCtrl(bool reg_64bit);
 		RegCtrl(const RegCtrl&) = delete;
 		RegCtrl(RegCtrl &&rc) noexcept;
 		
@@ -27,6 +29,8 @@ class RegCtrl
 		bool CreateKey(string key,REGSAM rs=KEY_ALL_ACCESS,bool *open=nullptr,SECURITY_ATTRIBUTES *sa=nullptr,DWORD op=REG_OPTION_NON_VOLATILE);
 		//打开键 
 		bool OpenKey(string key,REGSAM rs=KEY_ALL_ACCESS);
+		//关闭键
+		void CloseKey();
 		//删除键 
 		bool DelKey(string key);
 		//设置值(字符串)
@@ -39,7 +43,8 @@ class RegCtrl
 		bool GetValue(string value,string &dat,DWORD ty=REG_SZ,const int MAX_BUF=65536);
 		//读取值（数值） 
 		bool GetValue(string value,DWORD &dat,DWORD ty=REG_SZ);
-		
+		//设置处理64/32位注册表 
+		void set64bit(bool reg_64bit=true);
 		
 		RegCtrl& operator=(const RegCtrl&) = delete;
 		RegCtrl& operator=(RegCtrl&& rc) noexcept;
@@ -74,24 +79,21 @@ string RegCtrl::getkey(string str)
 }
 
 RegCtrl::RegCtrl() {}
-RegCtrl::RegCtrl(string key,REGSAM rs,bool *open,SECURITY_ATTRIBUTES *sa,DWORD op)
+RegCtrl::RegCtrl(bool reg_64bit)
 {
-	CreateKey(key,rs,open,sa,op);
+	set64bit(reg_64bit);
 }
 
 RegCtrl::~RegCtrl()
 {
-	if(isopen)
-		RegCloseKey(hKey);
+	this->CloseKey();
 }
 
 bool RegCtrl::CreateKey(string key,REGSAM rs,bool *open,SECURITY_ATTRIBUTES *sa,DWORD op)
 {
-	if(isopen)
-	{
-		RegCloseKey(hKey);
-		isopen=false;
-	}
+	this->CloseKey();
+	rs|=reg_bit;
+	
 	DWORD res;
 	
 	string subkey(getkey(key));
@@ -106,17 +108,23 @@ bool RegCtrl::CreateKey(string key,REGSAM rs,bool *open,SECURITY_ATTRIBUTES *sa,
 
 bool RegCtrl::OpenKey(string key,REGSAM rs)
 {
-	if(isopen)
-	{
-		RegCloseKey(hKey);
-		isopen=false;
-	}
+	this->CloseKey();
+	rs|=reg_bit;
 	
 	string subkey(getkey(key));
 	if(RegOpenKeyEx(getroot(key),subkey.c_str(),0,rs,&hKey) == ERROR_SUCCESS)
 	    isopen=true;
 	
 	return isopen;
+}
+
+bool RegCtrl::CloseKey()
+{
+	if(isopen)
+	{
+		RegCloseKey(hKey);
+		isopen=false;
+	}
 }
 
 bool RegCtrl::DelKey(string key)
@@ -167,8 +175,24 @@ bool RegCtrl::GetValue(string value,DWORD &dat,DWORD ty)
 	else return false;
 }
 
+void RegCtrl::set64bit(bool reg_64bit)
+{
+	if(Is64bitOs())
+	{
+		if(reg_64bit && !Is64bitProcess())
+			reg_bit|=KEY_WOW64_64KEY;
+
+		else if(!reg_64bit && Is64bitProcess())
+			reg_bit|=KEY_WOW32_64KEY;
+
+		else reg_bit=0;
+	}
+	else
+		reg_bit=0;
+}
+
 RegCtrl::RegCtrl(RegCtrl &&rc) noexcept
-	:hKey(rc.hKey)
+	:hKey(rc.hKey),reg_bit(rc.reg_bit)
 {
 	rc.isopen=false;
 }
@@ -179,6 +203,7 @@ RegCtrl& RegCtrl::operator=(RegCtrl&& rc) noexcept
 	{
 		hKey=rc.hKey;
 		isopen=rc.isopen;
+		reg_bit=re.reg_bit;
 		rc.isopen=false;
 	}
 	return *this;

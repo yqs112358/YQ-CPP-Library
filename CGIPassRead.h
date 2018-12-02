@@ -1,4 +1,9 @@
-#pragma once
+/*************************************
+
+*************************************/
+
+#ifndef YQ_CGI_PASS_READ
+#define YQ_CGI_PASS_READ
 
 #include <conio.h>
 #include <string>
@@ -43,3 +48,5 @@ string CGIPassRead(int len=-1)
 		return "";
 	}
 }
+
+#endif 
