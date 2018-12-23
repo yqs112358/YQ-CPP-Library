@@ -1,35 +1,29 @@
-#ifndef YQ_TASKKILL
-#define YQ_TASKKILL
+#ifndef YQ_TASK_KILL
+#define YQ_TASK_KILL
 
 #include <windows.h>
-#include <string>
 #include <tlhelp32.h>
+#include <cstring>
 
-using std::string;
-
-bool TaskKill(const string pro_name)
-{
-	if(pro_name.empty())
-		return false;
-		
+bool TaskKill(const char *proName)
+{	
 	HANDLE hSnapshot,hPro;
-	bool done=false;
+	bool isDone=false;
 	hSnapshot=CreateToolhelp32Snapshot(TH32CS_SNAPPROCESS,0);
-	if(hSnapshot <=0)
+	if(hSnapshot == NULL)
 		return false;
 	
 	PROCESSENTRY32 pe={sizeof(pe)};
 	bool next=Process32First(hSnapshot,&pe);
 	while(next)
 	{
-		if(pro_name == string(pe.szExeFile))
+		if(strcmp(proName,pe.szExeFile) == 0)
 		{
-			//                            !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-			hPro=OpenProcess(PROCESS_ALL_ACCESS,FALSE,pe.th32ProcessID);
-			if(hPro>0)
+			hPro=OpenProcess(PROCESS_TERMINATE,FALSE,pe.th32ProcessID);
+			if(hPro != NULL)
 			{
 				TerminateProcess(hPro,-1);
-				done=true;
+				isDone=true;
 				CloseHandle(hPro);
 			}
 		}
@@ -37,7 +31,7 @@ bool TaskKill(const string pro_name)
 	}
 	
 	CloseHandle(hSnapshot);
-	return done;
+	return isDone;
 }
 
 #endif
