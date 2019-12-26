@@ -13,7 +13,7 @@ LRESULT CALLBACK DefWndProc(HWND hwnd, UINT Message, WPARAM wParam, LPARAM lPara
 	return 0;
 }
 
-HWND CreateHideWindow(LPCTSTR windowClass, LPCTSTR windowCapital, 
+HWND CreateHideWindow(LPCTSTR windowClass, LPCTSTR windowCapital=TEXT(""), 
 		WNDPROC windowProc=DefWndProc)
 {
 	WNDCLASSEX wc;
@@ -36,10 +36,10 @@ HWND CreateHideWindow(LPCTSTR windowClass, LPCTSTR windowCapital,
 	return hwnd;
 }
 
-void RunMessageProcedure()
+void RunMessageProcedure(HWND hwnd=NULL)
 {
 	MSG msg;
-	while (GetMessage(&msg,NULL,0,0) > 0)
+	while (GetMessage(&msg,hwnd,0,0) > 0)
 	{
 		TranslateMessage(&msg);
 		DispatchMessage(&msg);
