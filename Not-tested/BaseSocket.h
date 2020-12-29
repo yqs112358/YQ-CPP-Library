@@ -1,19 +1,18 @@
-<<<<<<< HEAD
 /****************************************************************************
 * BaseSocket.h				-- YQ-CPP-Libraries
 *
-* ²ÉÓÃ  Apache 2.0  ¿ªÔ´Ðí¿ÉÖ¤
-* 		(Ïê¼û£ºwww.apache.org/licenses/LICENSE-2.0.html)
+* ï¿½ï¿½ï¿½ï¿½  Apache 2.0  ï¿½ï¿½Ô´ï¿½ï¿½ï¿½ï¿½Ö¤
+* 		(ï¿½ï¿½ï¿½ï¿½ï¿½www.apache.org/licenses/LICENSE-2.0.html)
 *
-* ×÷Õß£ºYQ
-* ×îºóÐÞ¸ÄÊ±¼ä£º2018-8-18 
+* ï¿½ï¿½ï¿½ß£ï¿½YQ
+* ï¿½ï¿½ï¿½ï¿½Þ¸ï¿½Ê±ï¿½ä£º2018-8-18 
 *
-* ¼òÊö£ºÍøÂç²Ù×÷Àà - »ùÀà - ¶¨Òå 
+* ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ - ï¿½ï¿½ï¿½ï¿½ - ï¿½ï¿½ï¿½ï¿½ 
 *
-* ±¸×¢£º1.ÒÀÀµ C++±ê×¼³ÌÐò¿â(STL)
-*		2.ÒÀÀµ winsock2.h ºÍ ws2_32.lib £¨Î¢ÈíÌ×½Ó×Ö¿ò¼Ü£© 
-* 		3.Ê¹ÓÃ C++11±ê×¼ ±àÐ´£¬±àÒëÊ±ÇëÎñ±Ø´ò¿ª C++11¼°ÒÔÉÏ±ê×¼ ±àÒë¿ª¹Ø
-* 		4.½öÓÃÓÚ WindowsÆ½Ì¨
+* ï¿½ï¿½×¢ï¿½ï¿½1.ï¿½ï¿½ï¿½ï¿½ C++ï¿½ï¿½×¼ï¿½ï¿½ï¿½ï¿½ï¿½(STL)
+*		2.ï¿½ï¿½ï¿½ï¿½ winsock2.h ï¿½ï¿½ ws2_32.lib ï¿½ï¿½Î¢ï¿½ï¿½ï¿½×½ï¿½ï¿½Ö¿ï¿½Ü£ï¿½ 
+* 		3.Ê¹ï¿½ï¿½ C++11ï¿½ï¿½×¼ ï¿½ï¿½Ð´ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê±ï¿½ï¿½ï¿½ï¿½Ø´ï¿½ C++11ï¿½ï¿½ï¿½ï¿½ï¿½Ï±ï¿½×¼ ï¿½ï¿½ï¿½ë¿ªï¿½ï¿½
+* 		4.ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ WindowsÆ½Ì¨
 ****************************************************************************/
 
 #ifndef YQ_BASE_SOCKET_H
@@ -55,61 +54,3 @@ public:
 #endif
 
 
-=======
-/****************************************************************************
-* BaseSocket.h				-- YQ-CPP-Libraries
-*
-* ²ÉÓÃ  Apache 2.0  ¿ªÔ´Ðí¿ÉÖ¤
-* 		(Ïê¼û£ºwww.apache.org/licenses/LICENSE-2.0.html)
-*
-* ×÷Õß£ºYQ
-* ×îºóÐÞ¸ÄÊ±¼ä£º2018-8-18 
-*
-* ¼òÊö£ºÍøÂç²Ù×÷Àà - »ùÀà - ¶¨Òå 
-*
-* ±¸×¢£º1.ÒÀÀµ C++±ê×¼³ÌÐò¿â(STL)
-*		2.ÒÀÀµ winsock2.h ºÍ ws2_32.lib £¨Î¢ÈíÌ×½Ó×Ö¿ò¼Ü£© 
-* 		3.Ê¹ÓÃ C++11±ê×¼ ±àÐ´£¬±àÒëÊ±ÇëÎñ±Ø´ò¿ª C++11¼°ÒÔÉÏ±ê×¼ ±àÒë¿ª¹Ø
-* 		4.½öÓÃÓÚ WindowsÆ½Ì¨
-****************************************************************************/
-
-#ifndef YQ_BASE_SOCKET_H
-#define YQ_BASE_SOCKET_H
-
-#pragma comment(lib,"ws2_32.lib")
-
-#include <winsock2.h>
-#include <string>
-
-using std::string;
-
-class BaseSocket
-{
-private:
-	SOCKET sock;
-	sockaddr_in *addr;
-	
-	BaseSocket();
-
-protected:
-	void setSock(SOCKET s);
-	SOCKET getSock();
-	sockaddr* getAddr();
-	
-	visual ~BaseSocket();
-
-public:
-	void setIP(const string &ip);
-	void setPort(unsigned int port);
-	void set(const string &ip,unsigned int port);
-	
-	BaseSocket(const BaseSocket&) = delete;
-	BaseSocket &operator=(const BaseSocket&) = delete;
-	BaseSocket(BaseSocket &&s);
-	BaseSocket &operator=(BaseSocket&&);		
-};
-
-#endif
-
-
->>>>>>> 98b2ee7e864df29667f44391c7a26fdb541c4564
