@@ -1,21 +1,20 @@
-<<<<<<< HEAD
 /****************************************************************************
 * TCPServer.h				-- YQ-CPP-Libraries
 *
-* ²ÉÓÃ  Apache 2.0  ¿ªÔ´Ðí¿ÉÖ¤
-* 		(Ïê¼û£ºwww.apache.org/licenses/LICENSE-2.0.html)
+* ï¿½ï¿½ï¿½ï¿½  Apache 2.0  ï¿½ï¿½Ô´ï¿½ï¿½ï¿½ï¿½Ö¤
+* 		(ï¿½ï¿½ï¿½ï¿½ï¿½www.apache.org/licenses/LICENSE-2.0.html)
 *
-* ×÷Õß£ºYQ
-* ×îºóÐÞ¸ÄÊ±¼ä£º2018-8-18 
+* ï¿½ï¿½ï¿½ß£ï¿½YQ
+* ï¿½ï¿½ï¿½ï¿½Þ¸ï¿½Ê±ï¿½ä£º2018-8-18 
 *
-* ¼òÊö£ºÍøÂç²Ù×÷Àà - ·þÎñ¶ËÀà - ¶¨Òå 
+* ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ - ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ - ï¿½ï¿½ï¿½ï¿½ 
 *
-* ±¸×¢£º1.ÒÀÀµ C++±ê×¼³ÌÐò¿â(STL)
-*		2.ÒÀÀµ winsock2.h ºÍ ws2_32.lib £¨Î¢ÈíÌ×½Ó×Ö¿ò¼Ü£© 
-*		3.ÒÀÀµ BaseSocket.h 		-- YQ-CPP-Libraries
-*		4.ÒÀÀµ TCPSocket.h 			-- YQ-CPP-Libraries
-* 		5.Ê¹ÓÃ C++11±ê×¼ ±àÐ´£¬±àÒëÊ±ÇëÎñ±Ø´ò¿ª C++11¼°ÒÔÉÏ±ê×¼ ±àÒë¿ª¹Ø
-* 		6.½öÓÃÓÚ WindowsÆ½Ì¨
+* ï¿½ï¿½×¢ï¿½ï¿½1.ï¿½ï¿½ï¿½ï¿½ C++ï¿½ï¿½×¼ï¿½ï¿½ï¿½ï¿½ï¿½(STL)
+*		2.ï¿½ï¿½ï¿½ï¿½ winsock2.h ï¿½ï¿½ ws2_32.lib ï¿½ï¿½Î¢ï¿½ï¿½ï¿½×½ï¿½ï¿½Ö¿ï¿½Ü£ï¿½ 
+*		3.ï¿½ï¿½ï¿½ï¿½ BaseSocket.h 		-- YQ-CPP-Libraries
+*		4.ï¿½ï¿½ï¿½ï¿½ TCPSocket.h 			-- YQ-CPP-Libraries
+* 		5.Ê¹ï¿½ï¿½ C++11ï¿½ï¿½×¼ ï¿½ï¿½Ð´ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê±ï¿½ï¿½ï¿½ï¿½Ø´ï¿½ C++11ï¿½ï¿½ï¿½ï¿½ï¿½Ï±ï¿½×¼ ï¿½ï¿½ï¿½ë¿ªï¿½ï¿½
+* 		6.ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ WindowsÆ½Ì¨
 ****************************************************************************/
 
 #ifndef YQ_TCP_SERVER_H
@@ -52,58 +51,3 @@ public:
 };
 
 #endif 
-=======
-/****************************************************************************
-* TCPServer.h				-- YQ-CPP-Libraries
-*
-* ²ÉÓÃ  Apache 2.0  ¿ªÔ´Ðí¿ÉÖ¤
-* 		(Ïê¼û£ºwww.apache.org/licenses/LICENSE-2.0.html)
-*
-* ×÷Õß£ºYQ
-* ×îºóÐÞ¸ÄÊ±¼ä£º2018-8-18 
-*
-* ¼òÊö£ºÍøÂç²Ù×÷Àà - ·þÎñ¶ËÀà - ¶¨Òå 
-*
-* ±¸×¢£º1.ÒÀÀµ C++±ê×¼³ÌÐò¿â(STL)
-*		2.ÒÀÀµ winsock2.h ºÍ ws2_32.lib £¨Î¢ÈíÌ×½Ó×Ö¿ò¼Ü£© 
-*		3.ÒÀÀµ BaseSocket.h 		-- YQ-CPP-Libraries
-*		4.ÒÀÀµ TCPSocket.h 			-- YQ-CPP-Libraries
-* 		5.Ê¹ÓÃ C++11±ê×¼ ±àÐ´£¬±àÒëÊ±ÇëÎñ±Ø´ò¿ª C++11¼°ÒÔÉÏ±ê×¼ ±àÒë¿ª¹Ø
-* 		6.½öÓÃÓÚ WindowsÆ½Ì¨
-****************************************************************************/
-
-#ifndef YQ_TCP_SERVER_H
-#define YQ_TCP_SERVER_H
-
-#include "BaseSocket.h"
-#include "TCPSocket.h"
-
-class TCPServer : public BaseSocket
-{
-private:
-	bool conn;
-
-protected:
-	using BaseSocket::setIP(const string &ip);
-	using BaseSocket::set(const string &ip,unsigned int port);
-	
-	void init();
-	void setConn(bool isconn);
-	
-public:
-	TCPSocket();
-	~TCPSocket();
-	
-	void close();
-	bool listen(unsigned int port,unsigned int max_conn=256);
-	TCPSocket accept();
-	bool is_conn();
-	
-	explicit operator bool() const
-	{
-		return is_conn();
-	}
-};
-
-#endif 
->>>>>>> 98b2ee7e864df29667f44391c7a26fdb541c4564

@@ -1,20 +1,19 @@
-<<<<<<< HEAD
 /****************************************************************************
 * TCPSocket.h				-- YQ-CPP-Libraries
 *
-* ²ÉÓÃ  Apache 2.0  ¿ªÔ´Ðí¿ÉÖ¤
-* 		(Ïê¼û£ºwww.apache.org/licenses/LICENSE-2.0.html)
+* ï¿½ï¿½ï¿½ï¿½  Apache 2.0  ï¿½ï¿½Ô´ï¿½ï¿½ï¿½ï¿½Ö¤
+* 		(ï¿½ï¿½ï¿½ï¿½ï¿½www.apache.org/licenses/LICENSE-2.0.html)
 *
-* ×÷Õß£ºYQ
-* ×îºóÐÞ¸ÄÊ±¼ä£º2018-8-19 
+* ï¿½ï¿½ï¿½ß£ï¿½YQ
+* ï¿½ï¿½ï¿½ï¿½Þ¸ï¿½Ê±ï¿½ä£º2018-8-19 
 *
-* ¼òÊö£ºÍøÂç²Ù×÷Àà - Í¨ÐÅÀà - ¶¨Òå 
+* ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ - Í¨ï¿½ï¿½ï¿½ï¿½ - ï¿½ï¿½ï¿½ï¿½ 
 *
-* ±¸×¢£º1.ÒÀÀµ C++±ê×¼³ÌÐò¿â(STL)
-*		2.ÒÀÀµ winsock2.h ºÍ ws2_32.lib £¨Î¢ÈíÌ×½Ó×Ö¿ò¼Ü£© 
-*		3.ÒÀÀµ BaseSocket.h 		-- YQ-CPP-Libraries
-* 		4.Ê¹ÓÃ C++11±ê×¼ ±àÐ´£¬±àÒëÊ±ÇëÎñ±Ø´ò¿ª C++11¼°ÒÔÉÏ±ê×¼ ±àÒë¿ª¹Ø
-* 		5.½öÓÃÓÚ WindowsÆ½Ì¨
+* ï¿½ï¿½×¢ï¿½ï¿½1.ï¿½ï¿½ï¿½ï¿½ C++ï¿½ï¿½×¼ï¿½ï¿½ï¿½ï¿½ï¿½(STL)
+*		2.ï¿½ï¿½ï¿½ï¿½ winsock2.h ï¿½ï¿½ ws2_32.lib ï¿½ï¿½Î¢ï¿½ï¿½ï¿½×½ï¿½ï¿½Ö¿ï¿½Ü£ï¿½ 
+*		3.ï¿½ï¿½ï¿½ï¿½ BaseSocket.h 		-- YQ-CPP-Libraries
+* 		4.Ê¹ï¿½ï¿½ C++11ï¿½ï¿½×¼ ï¿½ï¿½Ð´ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê±ï¿½ï¿½ï¿½ï¿½Ø´ï¿½ C++11ï¿½ï¿½ï¿½ï¿½ï¿½Ï±ï¿½×¼ ï¿½ï¿½ï¿½ë¿ªï¿½ï¿½
+* 		5.ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ WindowsÆ½Ì¨
 ****************************************************************************/
 
 #ifndef YQ_TCP_SOCKET_H
@@ -60,66 +59,3 @@ public:
 };
 
 #endif 
-=======
-/****************************************************************************
-* TCPSocket.h				-- YQ-CPP-Libraries
-*
-* ²ÉÓÃ  Apache 2.0  ¿ªÔ´Ðí¿ÉÖ¤
-* 		(Ïê¼û£ºwww.apache.org/licenses/LICENSE-2.0.html)
-*
-* ×÷Õß£ºYQ
-* ×îºóÐÞ¸ÄÊ±¼ä£º2018-8-19 
-*
-* ¼òÊö£ºÍøÂç²Ù×÷Àà - Í¨ÐÅÀà - ¶¨Òå 
-*
-* ±¸×¢£º1.ÒÀÀµ C++±ê×¼³ÌÐò¿â(STL)
-*		2.ÒÀÀµ winsock2.h ºÍ ws2_32.lib £¨Î¢ÈíÌ×½Ó×Ö¿ò¼Ü£© 
-*		3.ÒÀÀµ BaseSocket.h 		-- YQ-CPP-Libraries
-* 		4.Ê¹ÓÃ C++11±ê×¼ ±àÐ´£¬±àÒëÊ±ÇëÎñ±Ø´ò¿ª C++11¼°ÒÔÉÏ±ê×¼ ±àÒë¿ª¹Ø
-* 		5.½öÓÃÓÚ WindowsÆ½Ì¨
-****************************************************************************/
-
-#ifndef YQ_TCP_SOCKET_H
-#define YQ_TCP_SOCKET_H
-
-#include <string>
-#include <cstddef>
-#include "BaseSocket.h"
-
-using std::string;
-
-class TCPSocket : private BaseSocket
-{
-	friend TCPSocket TCPServer::accept();
-	
-private:
-	bool conn;
-	TCPSocket(SOCKET s,bool is_ok=true);
-
-protected:
-	using BaseSocket::getSock();
-	using BaseSocket::getAddr();
-	
-	void setConn(bool isconn);
-
-public:
-	visual ~TCPSocket();
-	void close();
-	bool is_conn();
-	
-	string getRemoteAddr(unsigned int *port=nullptr);
-	string getLocalAddr(unsigned int *port=nullptr);
-	
-	bool send(const char *data,size_t size);
-	bool send(const string &data,bool is_text=true);
-	bool recv(char *buf,size_t size,bool peek=false);
-	bool recv(string *buf,string::size_type size,bool is_text=true,bool peek=false);
-	
-	explicit operator bool() const
-	{
-		return is_conn();
-	}
-};
-
-#endif 
->>>>>>> 98b2ee7e864df29667f44391c7a26fdb541c4564

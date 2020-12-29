@@ -1,20 +1,19 @@
-<<<<<<< HEAD
 /****************************************************************************
 * TCPSocket.cpp				-- YQ-CPP-Libraries
 *
-* ²ÉÓÃ  Apache 2.0  ¿ªÔ´Ðí¿ÉÖ¤
-* 		(Ïê¼û£ºwww.apache.org/licenses/LICENSE-2.0.html)
+* ï¿½ï¿½ï¿½ï¿½  Apache 2.0  ï¿½ï¿½Ô´ï¿½ï¿½ï¿½ï¿½Ö¤
+* 		(ï¿½ï¿½ï¿½ï¿½ï¿½www.apache.org/licenses/LICENSE-2.0.html)
 *
-* ×÷Õß£ºYQ
-* ×îºóÐÞ¸ÄÊ±¼ä£º2018-8-21 
+* ï¿½ï¿½ï¿½ß£ï¿½YQ
+* ï¿½ï¿½ï¿½ï¿½Þ¸ï¿½Ê±ï¿½ä£º2018-8-21 
 *
-* ¼òÊö£ºÍøÂç²Ù×÷Àà - Í¨ÐÅÀà - ÊµÏÖ 
+* ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ - Í¨ï¿½ï¿½ï¿½ï¿½ - Êµï¿½ï¿½ 
 *
-* ±¸×¢£º1.ÒÀÀµ C++±ê×¼³ÌÐò¿â(STL)
-*		2.ÒÀÀµ TCPSocket.h 		-- YQ-CPP-Libraries
-*		3.ÒÀÀµ GetAddr.h 		-- YQ-CPP-Libraries
-* 		4.Ê¹ÓÃ C++11±ê×¼ ±àÐ´£¬±àÒëÊ±ÇëÎñ±Ø´ò¿ª C++11¼°ÒÔÉÏ±ê×¼ ±àÒë¿ª¹Ø
-* 		5.½öÓÃÓÚ WindowsÆ½Ì¨
+* ï¿½ï¿½×¢ï¿½ï¿½1.ï¿½ï¿½ï¿½ï¿½ C++ï¿½ï¿½×¼ï¿½ï¿½ï¿½ï¿½ï¿½(STL)
+*		2.ï¿½ï¿½ï¿½ï¿½ TCPSocket.h 		-- YQ-CPP-Libraries
+*		3.ï¿½ï¿½ï¿½ï¿½ GetAddr.h 		-- YQ-CPP-Libraries
+* 		4.Ê¹ï¿½ï¿½ C++11ï¿½ï¿½×¼ ï¿½ï¿½Ð´ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê±ï¿½ï¿½ï¿½ï¿½Ø´ï¿½ C++11ï¿½ï¿½ï¿½ï¿½ï¿½Ï±ï¿½×¼ ï¿½ï¿½ï¿½ë¿ªï¿½ï¿½
+* 		5.ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ WindowsÆ½Ì¨
 ****************************************************************************/
 
 #include "TCPSocket.h"
@@ -88,94 +87,3 @@ bool TCPSocket::recv(string *buf,string::size_type size,bool is_text,bool peek)
 	delete [] c_data;
 	return true;
 }
-=======
-/****************************************************************************
-* TCPSocket.cpp				-- YQ-CPP-Libraries
-*
-* ²ÉÓÃ  Apache 2.0  ¿ªÔ´Ðí¿ÉÖ¤
-* 		(Ïê¼û£ºwww.apache.org/licenses/LICENSE-2.0.html)
-*
-* ×÷Õß£ºYQ
-* ×îºóÐÞ¸ÄÊ±¼ä£º2018-8-21 
-*
-* ¼òÊö£ºÍøÂç²Ù×÷Àà - Í¨ÐÅÀà - ÊµÏÖ 
-*
-* ±¸×¢£º1.ÒÀÀµ C++±ê×¼³ÌÐò¿â(STL)
-*		2.ÒÀÀµ TCPSocket.h 		-- YQ-CPP-Libraries
-*		3.ÒÀÀµ GetAddr.h 		-- YQ-CPP-Libraries
-* 		4.Ê¹ÓÃ C++11±ê×¼ ±àÐ´£¬±àÒëÊ±ÇëÎñ±Ø´ò¿ª C++11¼°ÒÔÉÏ±ê×¼ ±àÒë¿ª¹Ø
-* 		5.½öÓÃÓÚ WindowsÆ½Ì¨
-****************************************************************************/
-
-#include "TCPSocket.h"
-#include "GetAddr.h"
-
-void TCPSocket::close()
-{
-	if(is_conn())
-	{
-		closesocket(getSock());
-		setConn(false);
-	}
-}
-
-bool TCPSocket::is_conn()
-{
-	return conn;
-}
-
-TCPSocket::~TCPSocket()
-{
-	close();
-}
-
-TCPSocket::TCPSocket(SOCKET s,bool is_ok)
-{
-	setSock(s);
-	setConn(is_ok);
-}
-
-string TCPSocket::getRemoteAddr(unsigned int *port)
-{
-	if(!is_conn())
-		return "";
-	return ::GetRemoteAddr(getSock(),port);
-}
-
-string TCPSocket::getRemoteAddr(unsigned int *port)
-{
-	if(!is_conn())
-		return "";
-	return ::GetLocalAddr(getSock(),port);
-}
-
-bool TCPSocket::send(const char *data,size_t size)
-{
-	return is_conn() && ::send(getSock(),data,size,0)>0;
-}
-
-bool TCPSocket::send(const string &data,bool is_text)
-{
-	return is_conn() && this->send(data.c_str(),is_text?data.size()+1:data.size());
-}
-
-bool TCPSocket::recv(char *buf,size_t size,bool peek)
-{
-	return is_conn() && ::recv(getSock(),buf,size,peek?MSG_PEEK:0);
-}
-
-bool TCPSocket::recv(string *buf,string::size_type size,bool is_text,bool peek)
-{
-	if(!is_conn())
-		return false;
-	char *c_data=new char[size+1];
-	if(!this->recv(c_data,size,peek))
-	{
-		delete [] c_data;
-		return false;
-	}
-	*buf=string(c_data,is_text?size+1:size);
-	delete [] c_data;
-	return true;
-}
->>>>>>> 98b2ee7e864df29667f44391c7a26fdb541c4564
